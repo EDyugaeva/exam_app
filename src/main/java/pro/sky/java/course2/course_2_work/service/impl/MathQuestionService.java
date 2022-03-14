@@ -1,22 +1,22 @@
 package pro.sky.java.course2.course_2_work.service.impl;
 
 import org.springframework.stereotype.Service;
-import pro.sky.java.course2.course_2_work.data.JavaQuestionRepository;
+import pro.sky.java.course2.course_2_work.data.MathQuestionRepository;
 import pro.sky.java.course2.course_2_work.data.Question;
 import pro.sky.java.course2.course_2_work.exceptions.EmptyParameterException;
-import pro.sky.java.course2.course_2_work.service.QuestionService;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
 @Service
-public class JavaQuestionService implements QuestionService {
-    private final JavaQuestionRepository javaQuestionRepository;
+public class MathQuestionService implements pro.sky.java.course2.course_2_work.service.QuestionService {
+    private final MathQuestionRepository mathQuestionRepository;
 
-    public JavaQuestionService(JavaQuestionRepository javaQuestionRepository) {
-        this.javaQuestionRepository = javaQuestionRepository;
+    public MathQuestionService(MathQuestionRepository mathQuestionRepository) {
+        this.mathQuestionRepository = mathQuestionRepository;
     }
+
 
     @Override
     public Question add(String question, String answer) {
@@ -24,36 +24,36 @@ public class JavaQuestionService implements QuestionService {
             throw new EmptyParameterException("Вопрос и/или ответ не задан(ы)");
         }
         Question addedQuestion = new Question(question, answer);
-        javaQuestionRepository.add(addedQuestion);
+        mathQuestionRepository.add(addedQuestion);
         return addedQuestion;
     }
 
     @Override
     public Question add(Question question) {
-        javaQuestionRepository.add(question);
+        mathQuestionRepository.add(question);
         return question;
     }
 
     @Override
     public Question remove(Question question) {
-        javaQuestionRepository.remove(question);
+        mathQuestionRepository.remove(question);
         return question;
     }
 
     @Override
     public Collection<Question> getAll() {
-        return javaQuestionRepository.getAll();
+        return mathQuestionRepository.getAll();
     }
 
     @Override
     public Question getRandomQuestion() {
-        if (javaQuestionRepository.getAll().isEmpty()) {
+        if (mathQuestionRepository.getAll().isEmpty()) {
             throw new EmptyParameterException("Лист с вопросами пустой");
         }
-        ArrayList<Question> listQuestion = new ArrayList<>(javaQuestionRepository.getAll());
+        ArrayList<Question> listQuestion = new ArrayList<>(mathQuestionRepository.getAll());
         Random ran = new Random();
-        int randomNumber = ran.nextInt(javaQuestionRepository.getAll().size());
+        int randomNumber = ran.nextInt(mathQuestionRepository.getAll().size());
         return listQuestion.get(randomNumber);
-
     }
+
 }

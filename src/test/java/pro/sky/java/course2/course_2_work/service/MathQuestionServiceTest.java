@@ -14,17 +14,17 @@ import static org.mockito.Mockito.when;
 import static pro.sky.java.course2.course_2_work.JavaQuestionServiceConstants.*;
 
 @ExtendWith(MockitoExtension.class)
-public class JavaQuestionServiceTest {
+public class MathQuestionServiceTest {
     @Mock
-    private MathQuestionRepository javaQuestionRepositoryMock;
+    private MathQuestionRepository mathQuestionRepositoryMock;
 
     @InjectMocks
     private MathQuestionService out;
 
     @Test
     public void testAddFromString() {
-        when(javaQuestionRepositoryMock.add(QUESTIONONE)).thenReturn(QUESTIONONE);
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(QUESTION_SET_OF_ONE);
+        when(mathQuestionRepositoryMock.add(QUESTIONONE)).thenReturn(QUESTIONONE);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(QUESTION_SET_OF_ONE);
 
         assertEquals(out.add(QUESTIONTEXTONE, ANSWERTEXTONE), QUESTIONONE);
         assertEquals(out.getAll().size(), 1);
@@ -35,8 +35,8 @@ public class JavaQuestionServiceTest {
 
     @Test
     public void testAddFromObject() {
-        when(javaQuestionRepositoryMock.add(QUESTIONONE)).thenReturn(QUESTIONONE);
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(QUESTION_SET_OF_ONE);
+        when(mathQuestionRepositoryMock.add(QUESTIONONE)).thenReturn(QUESTIONONE);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(QUESTION_SET_OF_ONE);
 
         assertEquals(out.add(QUESTIONONE), QUESTIONONE);
         assertEquals(out.getAll().size(), 1);
@@ -45,15 +45,15 @@ public class JavaQuestionServiceTest {
 
     @Test
     public void testRemove() {
-        when(javaQuestionRepositoryMock.remove(QUESTIONONE)).thenReturn(QUESTIONONE);
+        when(mathQuestionRepositoryMock.remove(QUESTIONONE)).thenReturn(QUESTIONONE);
         assertEquals(out.remove(QUESTIONONE), QUESTIONONE);
 
     }
 
     @Test
     public void testGetAll() {
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSJAVA);
-        assertEquals(out.getAll(), QUESTIONSJAVA);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSMATHS);
+        assertEquals(out.getAll(), QUESTIONSMATHS);
 
     }
 
@@ -61,8 +61,8 @@ public class JavaQuestionServiceTest {
     public void testGetRandomQuestion() {
         assertThrows(EmptyParameterException.class, () -> out.getRandomQuestion());
 
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSJAVA);
-        assertTrue(QUESTIONSJAVA.contains(out.getRandomQuestion()));
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSMATHS);
+        assertTrue(QUESTIONSMATHS.contains(out.getRandomQuestion()));
     }
 
 
