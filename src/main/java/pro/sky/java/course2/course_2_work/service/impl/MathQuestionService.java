@@ -1,52 +1,60 @@
 package pro.sky.java.course2.course_2_work.service.impl;
 
 import org.springframework.stereotype.Service;
-import pro.sky.java.course2.course_2_work.data.MathQuestionRepository;
 import pro.sky.java.course2.course_2_work.data.Question;
+import pro.sky.java.course2.course_2_work.exceptions.MethodNotAllowedException;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
 @Service
 public class MathQuestionService implements pro.sky.java.course2.course_2_work.service.QuestionService {
-    private final MathQuestionRepository mathQuestionRepository;
-
-    public MathQuestionService(MathQuestionRepository mathQuestionRepository) {
-        this.mathQuestionRepository = mathQuestionRepository;
-    }
-
 
     @Override
     public Question add(String question, String answer) {
-        Question addedQuestion = new Question(question, answer);
-        mathQuestionRepository.add(addedQuestion);
-        return addedQuestion;
+        throw new MethodNotAllowedException("Метод не доступен");
     }
 
     @Override
     public Question add(Question question) {
-        mathQuestionRepository.add(question);
-        return question;
+        throw new MethodNotAllowedException("Метод не доступен");
     }
 
     @Override
     public Question remove(Question question) {
-        mathQuestionRepository.remove(question);
-        return question;
+        throw new MethodNotAllowedException("Метод не доступен");
+
     }
 
     @Override
     public Collection<Question> getAll() {
-        return mathQuestionRepository.getAll();
+        throw new MethodNotAllowedException("Метод не доступен");
     }
 
     @Override
     public Question getRandomQuestion() {
-        ArrayList<Question> listQuestion = new ArrayList<>(mathQuestionRepository.getAll());
         Random ran = new Random();
-        int randomNumber = ran.nextInt(mathQuestionRepository.getAll().size());
-        return listQuestion.get(randomNumber);
+        int randomNumberFirst = ran.nextInt(1_000);
+        int randomNumberSecond = ran.nextInt(1_000);
+        int mathSign = ran.nextInt(4);
+
+        switch (mathSign) {
+            case 0:
+                return new Question(randomNumberFirst + " + " + randomNumberSecond, String.valueOf(randomNumberFirst + randomNumberSecond));
+
+            case 1:
+                return new Question(randomNumberFirst + " - " + randomNumberSecond, String.valueOf(randomNumberFirst - randomNumberSecond));
+
+            case 2:
+                return new Question(randomNumberFirst + " / " + randomNumberSecond, String.valueOf(randomNumberFirst / randomNumberSecond));
+
+            case 3:
+                return new Question(randomNumberFirst + " * " + randomNumberSecond, String.valueOf(randomNumberFirst * randomNumberSecond));
+
+            default:
+                throw new IllegalStateException("Ошибка");
+        }
+
     }
 
 }

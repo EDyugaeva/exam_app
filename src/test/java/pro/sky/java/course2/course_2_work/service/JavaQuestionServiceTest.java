@@ -5,7 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pro.sky.java.course2.course_2_work.data.MathQuestionRepository;
+import pro.sky.java.course2.course_2_work.data.JavaQuestionRepository;
+import pro.sky.java.course2.course_2_work.service.impl.JavaQuestionService;
 import pro.sky.java.course2.course_2_work.service.impl.MathQuestionService;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,10 +16,10 @@ import static pro.sky.java.course2.course_2_work.JavaQuestionServiceConstants.*;
 @ExtendWith(MockitoExtension.class)
 public class JavaQuestionServiceTest {
     @Mock
-    private MathQuestionRepository javaQuestionRepositoryMock;
+    private JavaQuestionRepository javaQuestionRepositoryMock;
 
     @InjectMocks
-    private MathQuestionService out;
+    private JavaQuestionService out;
 
     @Test
     public void testAddFromString() {
@@ -44,14 +45,12 @@ public class JavaQuestionServiceTest {
     public void testRemove() {
         when(javaQuestionRepositoryMock.remove(QUESTIONONE)).thenReturn(QUESTIONONE);
         assertEquals(out.remove(QUESTIONONE), QUESTIONONE);
-
     }
 
     @Test
     public void testGetAll() {
         when(javaQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSJAVA);
         assertEquals(out.getAll(), QUESTIONSJAVA);
-
     }
 
     @Test

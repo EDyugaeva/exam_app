@@ -30,7 +30,6 @@ public class ExaminerServiceTest {
     @Test
     public void testGetListQuestion() {
         assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestionSet(-1));
-        assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestionSet(8));
 
 
     }
