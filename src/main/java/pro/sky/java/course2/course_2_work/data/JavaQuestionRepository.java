@@ -24,7 +24,7 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @Override
     public Question add(Question question) {
-        if (questions.contains(question)) {
+        if (!questions.add(question)) {
             throw new QuestionAddedException("Такой объект уже добавлен");
         }
         questions.add(question);
@@ -33,7 +33,7 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @Override
     public Question remove(Question question) {
-        if (!questions.contains(question)) {
+        if (!questions.remove(question)) {
             throw new AbsentQuestionException("Такой вопрос в списке отсутствует");
         }
         questions.remove(question);

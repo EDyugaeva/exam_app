@@ -25,7 +25,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
 
     @Override
-    public Collection<Question> getQuestion(int amount) {
+    public Collection<Question> getQuestionSet(int amount) {
         if (amount > (javaQuestionService.getAll().size() + mathQuestionService.getAll().size())) {
             System.out.println(javaQuestionService.getAll().size());
             System.out.println(mathQuestionService.getAll().size());

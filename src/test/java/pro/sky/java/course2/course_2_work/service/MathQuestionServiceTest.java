@@ -6,7 +6,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.java.course2.course_2_work.data.MathQuestionRepository;
-import pro.sky.java.course2.course_2_work.exceptions.EmptyParameterException;
 import pro.sky.java.course2.course_2_work.service.impl.MathQuestionService;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,9 +27,6 @@ public class MathQuestionServiceTest {
 
         assertEquals(out.add(QUESTIONTEXTONE, ANSWERTEXTONE), QUESTIONONE);
         assertEquals(out.getAll().size(), 1);
-        assertThrows(EmptyParameterException.class, () -> out.add("", ANSWERTEXTTWO));
-        assertThrows(EmptyParameterException.class, () -> out.add(QUESTIONTEXTTWO, ""));
-
     }
 
     @Test
@@ -59,8 +55,6 @@ public class MathQuestionServiceTest {
 
     @Test
     public void testGetRandomQuestion() {
-        assertThrows(EmptyParameterException.class, () -> out.getRandomQuestion());
-
         when(mathQuestionRepositoryMock.getAll()).thenReturn(QUESTIONSMATHS);
         assertTrue(QUESTIONSMATHS.contains(out.getRandomQuestion()));
     }

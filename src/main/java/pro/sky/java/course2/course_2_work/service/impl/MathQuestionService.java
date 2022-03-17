@@ -3,7 +3,6 @@ package pro.sky.java.course2.course_2_work.service.impl;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.course_2_work.data.MathQuestionRepository;
 import pro.sky.java.course2.course_2_work.data.Question;
-import pro.sky.java.course2.course_2_work.exceptions.EmptyParameterException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,9 +19,6 @@ public class MathQuestionService implements pro.sky.java.course2.course_2_work.s
 
     @Override
     public Question add(String question, String answer) {
-        if (question.isEmpty() || answer.isEmpty()) {
-            throw new EmptyParameterException("Вопрос и/или ответ не задан(ы)");
-        }
         Question addedQuestion = new Question(question, answer);
         mathQuestionRepository.add(addedQuestion);
         return addedQuestion;
@@ -47,9 +43,6 @@ public class MathQuestionService implements pro.sky.java.course2.course_2_work.s
 
     @Override
     public Question getRandomQuestion() {
-        if (mathQuestionRepository.getAll().isEmpty()) {
-            throw new EmptyParameterException("Лист с вопросами пустой");
-        }
         ArrayList<Question> listQuestion = new ArrayList<>(mathQuestionRepository.getAll());
         Random ran = new Random();
         int randomNumber = ran.nextInt(mathQuestionRepository.getAll().size());

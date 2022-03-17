@@ -8,8 +8,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.java.course2.course_2_work.data.Question;
 import pro.sky.java.course2.course_2_work.exceptions.IllegalCountOfQuestionException;
 import pro.sky.java.course2.course_2_work.service.impl.ExaminerServiceImpl;
-import pro.sky.java.course2.course_2_work.service.impl.JavaQuestionService;
-import pro.sky.java.course2.course_2_work.service.impl.MathQuestionService;
 
 import java.util.Set;
 
@@ -31,14 +29,8 @@ public class ExaminerServiceTest {
 
     @Test
     public void testGetListQuestion() {
-        assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestion(-1));
-        assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestion(8));
-
-        when(javaQuestionServiceMock.getAll()).thenReturn(Set.of(QUESTIONONE, QUESTIONTWO));
-        when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(QUESTIONONE);
-
-        Set<Question> actual = Set.of(QUESTIONONE);
-        assertEquals(out.getQuestion(1), actual);
+        assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestionSet(-1));
+        assertThrows(IllegalCountOfQuestionException.class, () -> out.getQuestionSet(8));
 
 
     }
